@@ -60,11 +60,17 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
 
     def __str__(self):
-        return (f'Группа: {self.group.title}, '
-                f'Автор: {self.author.username}, '
-                f'Дата: {self.pub_date.strftime("%Y-%m-%d")}, '
-                f'{self.text[:15]}'
-                )
+        # изменено строковое представление группы,
+        # т.к. админка падает, если у поста нет группы
+        group_var = [self.group.title
+                     if self.group is not None else "без группы"
+                     ]
+        return (
+            f'Группа: {group_var}, '
+            f'Автор: {self.author.username}, '
+            f'Дата: {self.pub_date.strftime("%Y-%m-%d")}, '
+            f'{self.text[:15]}'
+        )
 
 
 class Comment(models.Model):
@@ -105,3 +111,8 @@ class Follow(models.Model):
     class Meta:
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'author'],
+                name='unique follow')
+        ]

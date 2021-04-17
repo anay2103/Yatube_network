@@ -6,18 +6,18 @@
 {% block content %}
 {% cache 20 index_page %}
   <div class="container">
-    {% include "menu.html" with index=True %}
+    {% include "includes/menu.html" with index=True %}
     <h1>Последние обновления на сайте</h1>
     {% for post in page  %}
       <h4>
         Автор: {{ post.author.username }},
         Дата публикации: {{ post.pub_date|date:"d M Y" }}
       </h4>
-      {% include "post_item.html" with post=post %} 
+      {% include "includes/post_item.html" with post=post %} 
     {% endfor %}
 
     {% if page.has_other_pages %}
-      {% include "paginator.html" with items=page paginator=paginator %}
+      {% include "includes/paginator.html" with items=page paginator=paginator %}
     {% endif %}
   </div>
 {% endcache %}

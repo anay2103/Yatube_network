@@ -124,7 +124,7 @@ class PostsURLTests(TestCase):
             PROFILE_URL: 'profile.html',
             self.MYPOST: 'post.html',
             self.MYPOST_EDIT: 'new_post.html',
-            self.MYPOST_COMMENT: 'comment.html',
+            self.MYPOST_COMMENT: 'includes/comment.html',
         }
         for url, template in templates_url_names.items():
             with self.subTest(url=url):

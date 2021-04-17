@@ -5,17 +5,17 @@
 
 {% block content %}
    
-  <p>{{group.description|linebreaksbr}}</p>
+  <p>{{ group.description|linebreaksbr }}</p>
   {% for post in page %}
     <h2>
       Автор: {{ post.author.get_full_name }},
       Дата публикации: {{ post.pub_date|date:"d M Y" }}
     </h2>
-    {% include "post_item.html" with post=post %} 
+    {% include "includes/post_item.html" with post=post %} 
     <hr>
   {% endfor %}
     
-  {% include "paginator.html" %} 
+  {% include "includes/paginator.html" %} 
 
 
 {% endblock %} 

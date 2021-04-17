@@ -1,38 +1,15 @@
 {% extends "base.html" %}
-{% block title %}Пост пользователя {{author.username}}{% endblock %}
+{% block title %}Пост пользователя {{ author.username }}{% endblock %}
 {% block content %}
 {% load thumbnail %}
 <main role="main" class="container">
   <div class="row">
     <div class="col-md-3 mb-3 mt-1">
-      <div class="card">
-        <div class="card-body">
-          <div class="h2">
-            {{author.get_full_name}}
-          </div>
-          <div class="h3 text-muted">
-            <a class="text-secondary" 
-            href="{% url 'profile' post.author.username %}">{{author.username}}</a>                            
-          </div>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="h6 text-muted">
-              Подписчиков: XXX <br />
-              Подписан: XXX
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="h6 text-muted">
-              Записей: {{author.posts.count}}
-            </div>
-          </li>
-        </ul>
-      </div>
+      {% include "includes/card.html" with author=author %}
     </div>
     <div class="col-md-9">                
-      {% include "post_item.html" with post=post %} 
-      {% include "comment.html" %}
+      {% include "includes/post_item.html" with post=post %} 
+      {% include "includes/comment.html" %}
     </div>
   </div>
 </main>

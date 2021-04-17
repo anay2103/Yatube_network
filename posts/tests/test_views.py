@@ -157,9 +157,8 @@ class PostViewsTests(TestCase):
         cache.clear()
 
     def test_authorized_user_can_follow(self):
-        """
-        Авторизованный пользователь может подписываться
-        на авторов и отписываться от них
+        """Авторизованный пользователь
+         может подписыватьсяна авторов
         """
         self.following_client.get(FOLLOW, follow=True)
         self.assertTrue(
@@ -167,6 +166,11 @@ class PostViewsTests(TestCase):
                 author=self.post.author
             ).exists()
         )
+
+    def test_authorized_user_can_unfollow(self):
+        """Авторизованный пользователь
+         может отписываться от авторов
+        """
         self.following_client.get(UNFOLLOW, follow=True)
         self.assertFalse(
             Follow.objects.filter(

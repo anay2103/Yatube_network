@@ -81,7 +81,10 @@ class ModelTest(TestCase):
     def test_post_object_name(self):
         """В поле __str__  объекта post совпадает с ожидаемым"""
         post = ModelTest.post
-        expected_object_name = (f'Группа: {post.group.title}, '
+        group_var = [post.group.title
+                     if post.group is not None else "без группы"
+                     ]
+        expected_object_name = (f'Группа: {group_var}, '
                                 f'Автор: {post.author.username}, '
                                 f'Дата: {post.pub_date.strftime("%Y-%m-%d")}, '
                                 f'{post.text[:15]}'
